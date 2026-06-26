@@ -5,6 +5,8 @@ public class Fighter : ISpaceship
     public int Speed { get; } = 100;
     public int FirePower { get; } = 40;
 
+
+    public int Ammo { get; private set; } = 40;
     public int DistanceTraveled { get; private set; }
     public int CurrentAngle { get; private set; }
 
@@ -20,6 +22,6 @@ public class Fighter : ISpaceship
 
     public void Fire()
     {
-        Console.WriteLine($"Истребитель выпустил ракету с мощностью {FirePower}.");
+        if (Ammo > 0) Ammo--;
     }
 }
