@@ -87,4 +87,16 @@ public class ClassAnalyzerTests
 
         Assert.Empty(result);
     }
+
+    [Fact]
+    public void GetMethodParams_WhenMethodHasNoParams_ReturnsOnlyReturnType()
+    {
+        var analyzer = new ClassAnalyzer(typeof(TestClass));
+        
+        var result = analyzer.GetMethodParams("Method").ToList();
+
+        Assert.Single(result);
+
+        Assert.Equal("ReturnType: Void", result[0]);
+    }
 }
