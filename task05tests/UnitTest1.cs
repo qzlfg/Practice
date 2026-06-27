@@ -1,5 +1,6 @@
 using Xunit;
-using Moq;
+using System;
+using System.Linq;
 
 public class TestClass
 {
@@ -8,6 +9,8 @@ public class TestClass
     public int Property { get; set; }
 
     public void Method() { }
+    
+    public void TargetMethod(int id, string name) { } 
 }
 
 [Serializable]
@@ -22,6 +25,7 @@ public class ClassAnalyzerTests
         var methods = analyzer.GetPublicMethods();
 
         Assert.Contains("Method", methods);
+        Assert.Contains("TargetMethod", methods);
     }
 
     [Fact]
@@ -37,7 +41,6 @@ public class ClassAnalyzerTests
     public void GetProperties_ReturnsCorrectProperties()
     {
         var analyzer = new ClassAnalyzer(typeof(TestClass));
-
         var properties = analyzer.GetProperties();
 
         Assert.Contains("Property", properties);
@@ -47,7 +50,6 @@ public class ClassAnalyzerTests
     public void HasAttribute_WhenAttributeExists_ReturnsTrue()
     {
         var analyzer = new ClassAnalyzer(typeof(AttributedClass));
-
         bool result = analyzer.HasAttribute<SerializableAttribute>();
 
         Assert.True(result);
@@ -58,6 +60,31 @@ public class ClassAnalyzerTests
     {
         var analyzer = new ClassAnalyzer(typeof(TestClass));
         bool result = analyzer.HasAttribute<SerializableAttribute>();
+
         Assert.False(result);
+    }
+
+    [Fact]
+    public void GetMethodParams_ReturnsCorrectParamsAndReturnType()
+    {
+        var analyzer = new ClassAnalyzer(typeof(TestClass));
+        
+        var result = analyzer.GetMethodParams("TargetMethod").ToList();
+
+        Assert.Contains("Int32 value: id", result);
+
+        Assert.Contains("String value: name", result);
+
+        Assert.Contains("ReturnType: Void", result);
+    }
+
+    [Fact]
+    public void GetMethodParams_WhenMethodNotFound_ReturnsEmpty()
+    {
+        var analyzer = new ClassAnalyzer(typeof(TestClass));
+        
+        var result = analyzer.GetMethodParams("FakeMethod");
+
+        Assert.Empty(result);
     }
 }
