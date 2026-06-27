@@ -26,7 +26,7 @@ public class StringExtensionsTests
     [Fact]
     public void IsPalindrome_WithPunctuation_IgnoresPunctuation()
     {
-        string input = "Was it a car or a cat I saw?";
+        string input = "Кит на море романтик...";
         Assert.True(input.IsPalindrome());
     }
 }
