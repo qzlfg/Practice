@@ -1,21 +1,20 @@
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 public static class ReflectionHelper
 {
     public static void PrintTypeInfo(Type someclass)
     {
-        var firstclassattr = someclass.GetCustomAttribute<DisplayNameAttribute>();
-        var secondclassattr = someclass.GetCustomAttribute<VersionAttribute>();
+        var FirstClassAttr = someclass.GetCustomAttribute<DisplayNameAttribute>();
+        var SecondClassAttr = someclass.GetCustomAttribute<VersionAttribute>();
 
-        if (firstclassattr != null)
+        if (FirstClassAttr != null)
         {
-            Console.WriteLine($"{someclass.Name} {firstclassattr.DisplayName}");
+            Console.WriteLine($"{someclass.Name} {FirstClassAttr.DisplayName}");
         }
 
-        if (secondclassattr != null)
+        if (SecondClassAttr != null)
         {
-            Console.WriteLine($"{someclass.Name} Version: {secondclassattr.Major}.{secondclassattr.Minor}");
+            Console.WriteLine($"{someclass.Name} Version: {SecondClassAttr.Major}.{SecondClassAttr.Minor}");
         }
 
 
@@ -24,24 +23,24 @@ public static class ReflectionHelper
 
         foreach (PropertyInfo proper in properties)
         {
-            var attrs = proper.GetCustomAttributes();
-            if (attrs != null)
+            var AttributesOfProperty = proper.GetCustomAttributes();
+            if (AttributesOfProperty != null)
             {
-                foreach (var attr in attrs)
+                foreach (var AttributeOfProperty in AttributesOfProperty)
                 {
-                    Console.WriteLine($"{proper.Name} {attr.GetType().Name}");
+                    Console.WriteLine($"{proper.Name} {AttributeOfProperty.GetType().Name}");
                 }
             }
         }
 
         foreach (MethodInfo method in methods)
         {
-            var attrs = method.GetCustomAttributes();
-            if (attrs != null)
+            var AttributesOfMethod = method.GetCustomAttributes();
+            if (AttributesOfMethod != null)
             {
-                foreach (var attr in attrs)
+                foreach (var AttributeOfMethod in AttributesOfMethod )
                 {
-                    Console.WriteLine($"{method.Name} {attr.GetType().Name}");
+                    Console.WriteLine($"{method.Name} {AttributeOfMethod.GetType().Name}");
                 }
             }
         }
