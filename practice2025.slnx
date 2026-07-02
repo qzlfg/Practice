@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CommandLib/CommandLib.csproj" />
+  <Project Path="CommandRunner/CommandRunner.csproj" />
+  <Project Path="CommandTests/CommandTests.csproj" />
+  <Project Path="FileSystemCommands/FileSystemCommands.csproj" />
+</Solution>
