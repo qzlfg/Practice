@@ -9,8 +9,17 @@
         File.WriteAllText(Path.Combine(testDir, "test2.txt"), "World");
 
         var command = new DirectorySizeCommand(testDir);
-        command.Execute(); // Проверяем, что не возникает исключений
 
+        using var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
+
+        command.Execute(); 
+
+        var output = stringWriter.ToString();
+
+        Assert.Contains("10", output); 
+
+        Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
         Directory.Delete(testDir, true);
     }
 
@@ -23,8 +32,19 @@
         File.WriteAllText(Path.Combine(testDir, "file2.log"), "Log");
 
         var command = new FindFilesCommand(testDir, "*.txt");
-        command.Execute(); // Должен найти 1 файл
 
+        using var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
+
+        command.Execute(); 
+
+        var output = stringWriter.ToString();
+        
+        Assert.Contains("file1.txt", output);
+
+        Assert.DoesNotContain("file2.log", output);
+
+        Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
         Directory.Delete(testDir, true);
     }
 
