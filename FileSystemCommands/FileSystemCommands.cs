@@ -1,5 +1,7 @@
 ﻿using System.IO;
 
+[DisplayName("Класс, который показывает сколько весит переданная директория")]
+[Version(2, 0)]
 public class DirectorySizeCommand: ICommand
 {
     private string _path;
@@ -30,17 +32,21 @@ public class DirectorySizeCommand: ICommand
 }
 
 
+[DisplayName("Класс который показывает все найденные файлы по какому-то паттерну в каком-то конкретной директории")]
+[Version(1, 1)]
 public class FindFilesCommand: ICommand
 {
     private string _path;
     private string _pattern;
 
+    [DisplayName("Конструктор")]
     public FindFilesCommand(string directory, string pattern) 
     {
         _path = directory;
         _pattern = pattern;
     }
 
+    [DisplayName("Метод с выполнением логики класса")]
     public void Execute()
     {
         if (!Directory.Exists(_path)) throw new DirectoryNotFoundException("Такой директории не существует");
