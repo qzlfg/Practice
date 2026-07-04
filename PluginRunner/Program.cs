@@ -31,8 +31,8 @@ public class Program
 
                 if (isClass && hasInterface && hasAttribute != null)
                 {
-                    InDegree[type] = hasAttribute.Dependecies.Length;
-                    foreach (var dependent_object in hasAttribute.Dependecies)
+                    InDegree[type] = hasAttribute.Dependencies.Length;
+                    foreach (var dependent_object in hasAttribute.Dependencies)
                     {
                         if (!graph.TryGetValue(dependent_object, out var list))
                         {

@@ -1,10 +1,25 @@
-﻿namespace PluginTests;
+﻿using System;
+using System.Collections.Generic;
+using Xunit;
 
-public class UnitTest1
+public class PluginIntegrationTests
 {
     [Fact]
-    public void Test1()
+    public void Main_ShouldExecutePluginsInCorrectOrder()
     {
+        using var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
 
+        Program.Main();
+
+        string actualOutput = stringWriter.ToString();
+
+        Assert.Contains("Plugin A что-то выполняет", actualOutput);
+        Assert.Contains("Плагин B что-то выполяет", actualOutput);
+
+        int indexA = actualOutput.IndexOf("Plugin A что-то выполняет");
+        int indexB = actualOutput.IndexOf("Плагин B что-то выполяет");
+
+        Assert.True(indexB < indexA, "Ошибка: PluginB должен был отработать раньше, чем PluginA!");
     }
 }

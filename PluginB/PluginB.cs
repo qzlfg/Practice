@@ -1,5 +1,4 @@
-﻿
-[PluginLoad()]
+﻿[PluginLoad()]
 public class PluginB: ICommand
 {
     public void Execute()

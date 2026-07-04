@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PluginRunner\PluginRunner.csproj" />
+    <ProjectReference Include="..\PluginA\PluginA.csproj" />
+    <ProjectReference Include="..\PluginB\PluginB.csproj" />
   </ItemGroup>
 
 </Project>
