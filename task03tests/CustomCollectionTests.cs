@@ -1,7 +1,7 @@
 using Xunit;
 using Moq;
 
-public class IteratorTests
+public class CustomCollectionTests
 {
     [Fact]
     public void CustomCollection_GetEnumerator_ReturnsAllItems()
