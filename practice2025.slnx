@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CommandLib/CommandLib.csproj" />
+  <Project Path="FileSystemCommands/FileSystemCommands.csproj" />
+  <Project Path="MetadataReader/MetadataReader.csproj" />
+  <Project Path="task09tests/task09tests.csproj" />
+</Solution>
