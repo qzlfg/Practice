@@ -22,4 +22,20 @@ public class PluginIntegrationTests
 
         Assert.True(indexB < indexA, "Ошибка: PluginB должен был отработать раньше, чем PluginA!");
     }
+
+    [Fact]
+    public void Main_OutputShouldNotBeEmptyAndContainExecutionLogs()
+    {
+        using var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
+
+        var exception = Record.Exception(() => Program.Main());
+        
+        Assert.Null(exception); 
+
+        string actualOutput = stringWriter.ToString();
+
+        Assert.NotNull(actualOutput);
+        Assert.NotEmpty(actualOutput);
+    }
 }
