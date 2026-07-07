@@ -11,7 +11,19 @@ public class Program
         }
         Assembly assembly = Assembly.LoadFrom(args[0]);
 
-        Type[] types = assembly.GetTypes();
+        Type[] types;
+
+        try
+        {
+            types = assembly.GetTypes();
+        }
+        catch (ReflectionTypeLoadException ex)
+        {
+            types = ex.Types.Where(t => t != null).ToArray()!;
+            
+            Console.WriteLine("Некоторые зависимые библиотеки не найдены. " +
+                            "Выводятся только доступные метаданные.");
+        }
 
         foreach (Type type in types)
         {
