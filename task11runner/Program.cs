@@ -17,7 +17,10 @@ public class Program
             public int Div(int a, int b) => a / b;
         }";
 
-        DynamicCompiler.CompileCalculator(code);
+        ICalculator calculator = DynamicCompiler.CompileCalculator(code);
+
+        Console.WriteLine($"Add (10 + 5): {calculator.Add(10, 5)}");
+        Console.WriteLine($"Mul (10 * 5): {calculator.Mul(10, 5)}");
 
     }
 }
