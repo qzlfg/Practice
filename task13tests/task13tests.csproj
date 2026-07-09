@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\task13\task13.csproj" />
+    <ProjectReference Include="..\task13runner\task13runner.csproj" />
   </ItemGroup>
 
 </Project>

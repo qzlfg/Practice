@@ -2,7 +2,7 @@ using System;
 using System.Text.Json.Serialization;
 
 
-[JsonSerializable]
+[Serializable]
 public class Student
 {
     public string FirstName { get; set; }
