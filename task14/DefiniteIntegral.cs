@@ -20,6 +20,8 @@ public class DefiniteIntegral
 
         using Barrier barrier = new Barrier(threadsNumber + 1);
 
+        Thread[] threads = new Thread[threadsNumber];
+
 
         for (int i = 0; i < threadsNumber; i++)
         {
@@ -47,6 +49,8 @@ public class DefiniteIntegral
 
             t.Start();
         }
+        
+        barrier.SignalAndWait();
 
 
         return Sum[0];
@@ -62,5 +66,17 @@ public class DefiniteIntegral
             
         }
         while (initialValue != Interlocked.CompareExchange(ref target, computedValue, initialValue));
+    }
+
+
+    public static double SolveSingleThread(double a, double b, Func<double, double> function, double step)
+    {
+        double sum = 0.0;
+        for (double x = a; x < b; x += step)
+        {
+            double currentStep = Math.Min(step, b - x);
+            sum += (function(x) + function(x + currentStep)) / 2.0 * currentStep;
+        }
+        return sum;
     }
 }
