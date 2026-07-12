@@ -48,6 +48,7 @@ public class DefiniteIntegral
             t.Start();
         }
 
+        barrier.SignalAndWait();
 
         return Sum[0];
     }
